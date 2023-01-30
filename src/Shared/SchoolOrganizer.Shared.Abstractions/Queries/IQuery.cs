@@ -1,4 +1,4 @@
-﻿namespace Shared.Abstractions.Queries;
+﻿namespace SchoolOrganizer.Shared.Abstractions.Queries;
 
 public interface IQuery
 {

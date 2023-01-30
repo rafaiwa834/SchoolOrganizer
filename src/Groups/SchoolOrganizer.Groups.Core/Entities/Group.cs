@@ -1,4 +1,4 @@
-namespace Groups.Core.Entities;
+namespace SchoolOrganizer.Groups.Core.Entities;
 
 public class Group
 {

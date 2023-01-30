@@ -1,4 +1,4 @@
-﻿namespace Shared.Abstractions.Commands;
+﻿namespace SchoolOrganizer.Shared.Abstractions.Commands;
 
 public interface ICommandDispatcher
 {

@@ -8,15 +8,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9AAB90E1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{59784F39-9103-419F-8EC6-21192A79E284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Infrastructure", "src\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj", "{D63BF778-C415-472F-8FC1-069B1D6F4CFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Shared.Infrastructure", "src\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj", "{D63BF778-C415-472F-8FC1-069B1D6F4CFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Abstractions", "src\Shared\Shared.Abstractions\Shared.Abstractions.csproj", "{4E366AD7-B8D8-4F0F-87BD-823FBD9CF125}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Shared.Abstractions", "src\Shared\SchoolOrganizer.Shared.Abstractions\SchoolOrganizer.Shared.Abstractions.csproj", "{4E366AD7-B8D8-4F0F-87BD-823FBD9CF125}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Groups", "Groups", "{192CC742-92DD-4718-8084-C19A1F2BC48E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Groups.Api", "src\Groups\Groups.Api\Groups.Api.csproj", "{4DCA6C8E-9F0B-44D6-9205-B346B0D42B76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Groups.Api", "src\Groups\SchoolOrganizer.Groups.Api\SchoolOrganizer.Groups.Api.csproj", "{4DCA6C8E-9F0B-44D6-9205-B346B0D42B76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Groups.Core", "src\Groups\Groups.Core\Groups.Core.csproj", "{717F606C-2A2C-4B35-9B25-D0790271CF5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Groups.Core", "src\Groups\SchoolOrganizer.Groups.Core\SchoolOrganizer.Groups.Core.csproj", "{717F606C-2A2C-4B35-9B25-D0790271CF5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

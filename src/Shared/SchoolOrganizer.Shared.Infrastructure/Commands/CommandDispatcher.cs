@@ -1,7 +1,7 @@
-﻿using Shared.Abstractions.Commands;
+﻿using SchoolOrganizer.Shared.Abstractions.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Shared.Infrastructure.Commands;
+namespace SchoolOrganizer.Shared.Infrastructure.Commands;
 
 public class CommandDispatcher: ICommandDispatcher
 {

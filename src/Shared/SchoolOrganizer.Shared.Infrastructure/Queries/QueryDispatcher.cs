@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Shared.Abstractions.Queries;
+using SchoolOrganizer.Shared.Abstractions.Queries;
 
-namespace Shared.Infrastructure.Queries;
+namespace SchoolOrganizer.Shared.Infrastructure.Queries;
 
 public class QueryDispatcher: IQueryDispatcher
 {

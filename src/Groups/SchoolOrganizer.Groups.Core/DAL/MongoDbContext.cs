@@ -1,4 +1,4 @@
-namespace Groups.Core.DAL;
+namespace SchoolOrganizer.Groups.Core.DAL;
 
 public class MongoDbContext
 {
