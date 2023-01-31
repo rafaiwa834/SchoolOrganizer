@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Groups\SchoolOrganizer.Groups.Api\SchoolOrganizer.Groups.Api.csproj" />
       <ProjectReference Include="..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
     </ItemGroup>
 

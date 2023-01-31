@@ -5,16 +5,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 var (assemblies, moduleAssemblies, modules) = AppInitializer.Initialize(builder);
 
-Console.WriteLine(AppDomain.CurrentDomain.FriendlyName);
-
-foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+foreach (var module in modules)
 {
-    Console.WriteLine( "Assembly:   " + assembly.FullName);
+    module.Register(builder.Services, builder.Configuration);
+}
+// Registry services
+
+var app = builder.Build();
+
+foreach (var module in modules)
+{
+    module.Use(app);
 }
 
-Console.WriteLine("Base directory: " + AppDomain.CurrentDomain.BaseDirectory);
-foreach (var directory in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll").ToList())
-{
-    Console.WriteLine("Driectory: " + directory);
-}
+
+app.Run();
 
