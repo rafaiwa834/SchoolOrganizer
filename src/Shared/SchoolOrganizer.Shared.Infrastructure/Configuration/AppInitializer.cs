@@ -1,10 +1,9 @@
-using System.Collections.Immutable;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using SchoolOrganizer.Shared.Abstractions.Module;
 
-namespace Bootstrapper;
+namespace SchoolOrganizer.Shared.Infrastructure.Configuration;
 
 public static class AppInitializer
 {
@@ -23,13 +22,14 @@ public static class AppInitializer
         foreach (var file in files)
         {
             if(!file.Contains(ModulePrefix)) continue;
-
+            Console.WriteLine($"git plik: {file}");
             var moduleName = file.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries)
                 .Last()
                 .Split(".", StringSplitOptions.RemoveEmptyEntries)[1];
             var enabled = builder.Configuration.GetValue<bool>($"{moduleName}:ModuleEnabled");
-
+            Console.WriteLine(enabled);
             if (!enabled) continue;
+            Console.WriteLine("plik jest włączony");
             var assembly = AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName((file)));
             assemblies.TryAdd(assembly.Location, assembly);
             moduleAssemblies.Add(assembly);
