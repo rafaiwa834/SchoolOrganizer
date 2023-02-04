@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace SchoolOrganizer.Groups.Api.Controlers;
+namespace SchoolOrganizer.Groups.Api.Controllers;
 
 [ApiController]
-public class HealCheck: ControllerBase
+[Route("groups")]
+public class HealtCheck: ControllerBase
 {
     [HttpGet]
     public ActionResult<string> Get() => Ok("Groups module is working");
