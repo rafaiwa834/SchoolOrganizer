@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using SchoolOrganizer.Shared.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.ConfigureModules();
 
 var (assemblies, moduleAssemblies, modules) = AppInitializer.Initialize(builder);
 

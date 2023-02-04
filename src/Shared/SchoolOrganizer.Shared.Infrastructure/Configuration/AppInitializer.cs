@@ -43,19 +43,5 @@ public static class AppInitializer
         
         return new AppContext(assemblies.Select(x => x.Value).ToList(), moduleAssemblies, modules.ToHashSet());
     }
-    
-    private static Type[] TryGetTypes(this Assembly assembly)
-    {
-        Type[] types;
-        try
-        {
-            types = assembly.GetTypes();
-        }
-        catch (ReflectionTypeLoadException e)
-        {
-            types = e.Types!;
-        }
-        return types;
-    }
 
 }
