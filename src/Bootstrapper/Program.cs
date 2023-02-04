@@ -6,6 +6,7 @@ using SchoolOrganizer.Shared.Infrastructure.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureModules();
 
+
 var (assemblies, moduleAssemblies, modules) = AppInitializer.Initialize(builder);
 
 foreach (var module in modules)
