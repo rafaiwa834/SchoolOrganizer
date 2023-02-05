@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Abstractions\SchoolOrganizer.Shared.Abstractions.csproj" />
+      <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
       <ProjectReference Include="..\SchoolOrganizer.Groups.Core\SchoolOrganizer.Groups.Core.csproj" />
     </ItemGroup>
 
