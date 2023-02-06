@@ -19,5 +19,7 @@ public class GroupsModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
+        
+        app.UseCore();
     }
 }

@@ -14,7 +14,6 @@ public class GroupsDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         if (Database.IsRelational()) modelBuilder.HasDefaultSchema("Groups");
-        // new GroupsDbConfiguration().Configure(modelBuilder.Entity<Group>());
         modelBuilder.ApplyConfiguration(new GroupsDbConfiguration());
         base.OnModelCreating(modelBuilder);
     }

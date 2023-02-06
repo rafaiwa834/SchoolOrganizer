@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Bootstrapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SchoolOrganizer.Shared.Infrastructure.Configuration;
 
@@ -41,6 +43,9 @@ app.UseEndpoints(endpoints =>
 {
     app.MapControllers();
 });
+
+if (app.Environment.IsDevelopment())
+    await app.Migrate(assemblies);
 
 app.Run();
 
