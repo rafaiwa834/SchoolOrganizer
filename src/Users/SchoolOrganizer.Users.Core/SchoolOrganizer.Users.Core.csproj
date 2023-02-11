@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>SchoolOrganizer.Users.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BCrypt.Net" Version="0.1.0" />
+    </ItemGroup>
+
+</Project>
