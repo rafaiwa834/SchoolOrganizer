@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using SchoolOrganizer.Shared.Abstractions.Auth;
+using SchoolOrganizer.Shared.Abstractions.Time;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace SchoolOrganizer.Shared.Infrastructure.Auth;
@@ -12,12 +13,15 @@ namespace SchoolOrganizer.Shared.Infrastructure.Auth;
 public class TokenManager: ITokenManager
 {
     private readonly JwtTokenSettings _jwtTokenSettings;
-    public TokenManager(JwtTokenSettings jwtTokenSettings)
+    private readonly IClock _clock;
+
+    public TokenManager(JwtTokenSettings jwtTokenSettings, IClock clock)
     {
         _jwtTokenSettings = jwtTokenSettings;
+        _clock = clock;
     }
     
-    public JwtToken CreateToken(string userId, string userRole, string userEmail)
+    public string CreateToken(string userId, string userRole, string userEmail)
     {
         var claims = new[]
         {
@@ -27,7 +31,7 @@ public class TokenManager: ITokenManager
             new Claim(ClaimTypes.Role, userRole)
         };
 
-        var expiresTime = DateTime.Now.AddMinutes(_jwtTokenSettings.DurationInMinutes);
+        var expiresTime = _clock.GetDateTimeNow().AddMinutes(_jwtTokenSettings.DurationInMinutes);
         var key = Encoding.ASCII.GetBytes(_jwtTokenSettings.Key);
         var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
             SecurityAlgorithms.HmacSha256);
@@ -42,11 +46,7 @@ public class TokenManager: ITokenManager
 
         var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-        return new JwtToken()
-        {
-            UserId = userId,
-            Token = token
-        };
+        return token;
     }
     
     public string GenerateRefreshToken()
@@ -59,7 +59,7 @@ public class TokenManager: ITokenManager
         }
     }
 
-    public ClaimsPrincipal GetPricncipalFromExpiredToken(string token)
+    public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
     {
         var tokenValidationParameters = new TokenValidationParameters()
         {
