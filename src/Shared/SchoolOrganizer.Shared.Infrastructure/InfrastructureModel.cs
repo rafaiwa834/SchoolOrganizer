@@ -2,18 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SchoolOrganizer.Shared.Abstractions.Module;
-using SchoolOrganizer.Users.Core;
+using SchoolOrganizer.Shared.Infrastructure.Auth;
 
-namespace SchoolOrganizer.Users.Api;
+namespace SchoolOrganizer.Shared.Infrastructure;
 
-public class UsersModule : IModule
+public class InfrastructureModel : IModule
 {
-    public const string BasePath = "users";
-    public string Name { get; } = "Users";
+    public string Name { get; } = "Shared Infrastructure";
 
     public void Register(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddCore(configuration);
+        services.AddAuth();
     }
 
     public void Use(IApplicationBuilder app)

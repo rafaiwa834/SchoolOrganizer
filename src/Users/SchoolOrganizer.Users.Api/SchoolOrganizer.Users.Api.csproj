@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+      <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Abstractions\SchoolOrganizer.Shared.Abstractions.csproj" />
+      <ProjectReference Include="..\SchoolOrganizer.Users.Core\SchoolOrganizer.Users.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ using SchoolOrganizer.Users.Core.Exceptions;
 
 namespace SchoolOrganizer.Users.Core.Services;
 
-public class IdentityService
+public class IdentityService: IIdentityService
 {
     private readonly UsersDbContext _usersDbContext;
     private readonly ITokenManager _tokenManager;
@@ -23,7 +23,7 @@ public class IdentityService
         _clock = clock;
     }
 
-    internal async Task Register(RegisterDto registerDto, CancellationToken cancellationToken = default)
+    public async Task Register(RegisterDto registerDto, CancellationToken cancellationToken = default)
     {
         var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Email == registerDto.Email, cancellationToken);
         if (user is not null)
@@ -41,7 +41,7 @@ public class IdentityService
         await _usersDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    internal async Task<JwtToken> Login(LoginDto loginDto, CancellationToken cancellationToken= default)
+    public async Task<JwtToken> Login(LoginDto loginDto, CancellationToken cancellationToken= default)
     {
         var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Email == loginDto.Email, cancellationToken);
         if (user is null)
@@ -63,7 +63,7 @@ public class IdentityService
         };
     }
 
-    internal async Task<JwtToken> RefreshToken(JwtToken jwtToken, CancellationToken cancellationToken = default)
+    public async Task<JwtToken> RefreshToken(JwtToken jwtToken, CancellationToken cancellationToken = default)
     {
         var principal = _tokenManager.GetPrincipalFromExpiredToken(jwtToken.AccesToken);
         var userId = principal.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
