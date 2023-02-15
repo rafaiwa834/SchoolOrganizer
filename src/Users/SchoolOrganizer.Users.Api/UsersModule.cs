@@ -13,7 +13,6 @@ public class UsersModule : IModule
 
     public void Register(IServiceCollection services, IConfiguration configuration)
     {
-        Console.WriteLine("Hello in users module");
         services.AddCore(configuration);
     }
 

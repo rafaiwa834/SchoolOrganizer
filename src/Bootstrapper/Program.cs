@@ -13,13 +13,10 @@ var (assemblies, moduleAssemblies, modules) = AppInitializer.Initialize(builder)
 
 foreach (var module in modules)
 {
-    Console.WriteLine(module.Name);
     module.Register(builder.Services, builder.Configuration);
     builder.Services.AddControllers().AddApplicationPart(module.GetType().Assembly);
 }
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
