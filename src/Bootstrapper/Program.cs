@@ -38,7 +38,6 @@ app.UseSwaggerUI(c =>
 
 app.UseRouting();
 
-app.MapGet("/", () => "Hello in SchoolOrganizer!");
 app.UseEndpoints(endpoints =>
 {
     app.MapControllers();

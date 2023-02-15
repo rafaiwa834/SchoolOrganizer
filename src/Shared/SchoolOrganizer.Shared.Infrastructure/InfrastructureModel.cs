@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SchoolOrganizer.Shared.Abstractions.Module;
+using SchoolOrganizer.Shared.Abstractions.Time;
 using SchoolOrganizer.Shared.Infrastructure.Auth;
+using SchoolOrganizer.Shared.Infrastructure.Time;
 
 namespace SchoolOrganizer.Shared.Infrastructure;
 
@@ -12,7 +14,8 @@ public class InfrastructureModel : IModule
 
     public void Register(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddAuth();
+        services.AddAuth(configuration);
+        services.AddScoped<IClock, Clock>();
     }
 
     public void Use(IApplicationBuilder app)

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bootstrapper.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Bootstrapper")]
 public class TestController: ControllerBase
 {
     [HttpGet]
