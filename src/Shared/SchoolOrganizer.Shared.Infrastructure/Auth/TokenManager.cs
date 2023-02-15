@@ -30,7 +30,6 @@ public class TokenManager: ITokenManager
             new Claim(JwtRegisteredClaimNames.Sub, userId),
             new Claim(ClaimTypes.Role, userRole)
         };
-
         var expiresTime = _clock.GetDateTimeNow().AddMinutes(_jwtTokenSettings.DurationInMinutes);
         var key = Encoding.ASCII.GetBytes(_jwtTokenSettings.Key);
         var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key),

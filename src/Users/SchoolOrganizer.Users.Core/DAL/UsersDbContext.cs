@@ -6,7 +6,7 @@ namespace SchoolOrganizer.Users.Core.DAL;
 
 public class UsersDbContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> Users => Set<User>();
     public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)
     {
     }
