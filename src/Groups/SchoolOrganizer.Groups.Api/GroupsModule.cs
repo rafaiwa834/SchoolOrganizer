@@ -14,6 +14,7 @@ public class GroupsModule : IModule
 
     public void Register(IServiceCollection services, IConfiguration configuration)
     {
+        Console.WriteLine("Hello in groups module");
         services.AddCore(configuration);
     }
 

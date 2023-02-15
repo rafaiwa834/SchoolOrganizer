@@ -13,6 +13,7 @@ var (assemblies, moduleAssemblies, modules) = AppInitializer.Initialize(builder)
 
 foreach (var module in modules)
 {
+    Console.WriteLine(module.Name);
     module.Register(builder.Services, builder.Configuration);
     builder.Services.AddControllers().AddApplicationPart(module.GetType().Assembly);
 }

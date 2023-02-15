@@ -6,6 +6,6 @@ namespace SchoolOrganizer.Users.Api.Controllers;
 [Route(UsersModule.BasePath)]
 public class HealthCheckController: ControllerBase
 {
-    [HttpGet("/healthcheck")]
+    [HttpGet("/healthcheck1")]
     public ActionResult<string> Get() => Ok("Users module is working");
 }
