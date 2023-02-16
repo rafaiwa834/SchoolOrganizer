@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using SchoolOrganizer.Shared.Infrastructure.Configuration;
 
@@ -18,10 +19,12 @@ internal static class DbInitializer
             .Cast<DbContext>()
             .ToList();
 
-        await context.FirstOrDefault()!.Database.EnsureDeletedAsync();
-
-        var migrations = context.Select(x => x.Database.EnsureCreatedAsync());
-        await Task.WhenAll(migrations);
+        // await context.FirstOrDefault()!.Database.EnsureDeletedAsync();
+        
+        // var migrations = context.Select(x => x.Database.MigrateAsync());
+        // await Task.WhenAll(migrations);
+        var migration = context.FirstOrDefault();
+        await migration.Database.MigrateAsync();
     }
 
     public static IEnumerable<Type> GetContext(IEnumerable<Assembly> assemblies)
