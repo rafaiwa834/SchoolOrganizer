@@ -21,7 +21,6 @@ public class AuthorizationController: ControllerBase
     [HttpPost("register")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Register([FromBody] RegisterDto registerDto)
     {
         await _identityService.Register(registerDto);
@@ -31,16 +30,16 @@ public class AuthorizationController: ControllerBase
     [HttpPost("login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<JwtToken>> Login([FromBody] LoginDto loginDto)
     {
         return Ok(await _identityService.Login(loginDto));
     }
-
+    
     [HttpPost("refresh")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<JwtToken>> RefreshToken([FromBody] JwtToken jwtToken)
     {
         return Ok(await _identityService.RefreshToken(jwtToken));

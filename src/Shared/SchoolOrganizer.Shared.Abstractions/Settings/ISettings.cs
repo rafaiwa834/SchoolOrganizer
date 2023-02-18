@@ -1,4 +1,4 @@
-namespace SchoolOrganizer.Shared.Infrastructure.Settings;
+namespace SchoolOrganizer.Shared.Abstractions.Settings;
 
 public interface ISettings
 {
