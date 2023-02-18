@@ -9,14 +9,6 @@ public static class Extensions
 {
     public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtTokenSettings = configuration.GetOptions<JwtTokenSettings>();
-        services.AddScoped<JwtTokenSettings>( x=> new JwtTokenSettings()
-        {
-            Key = jwtTokenSettings.Key,
-            Issuer = jwtTokenSettings.Issuer,
-            Audience = jwtTokenSettings.Audience,
-            DurationInMinutes = jwtTokenSettings.DurationInMinutes
-        });
         services.AddScoped<ITokenManager, TokenManager>();
         return services;
     }

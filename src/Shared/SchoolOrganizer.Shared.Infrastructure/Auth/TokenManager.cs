@@ -3,9 +3,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SchoolOrganizer.Shared.Abstractions.Auth;
 using SchoolOrganizer.Shared.Abstractions.Time;
+using SchoolOrganizer.Shared.Infrastructure.Settings;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace SchoolOrganizer.Shared.Infrastructure.Auth;
@@ -15,9 +17,9 @@ public class TokenManager: ITokenManager
     private readonly JwtTokenSettings _jwtTokenSettings;
     private readonly IClock _clock;
 
-    public TokenManager(JwtTokenSettings jwtTokenSettings, IClock clock)
+    public TokenManager(IConfiguration configuration, IClock clock)
     {
-        _jwtTokenSettings = jwtTokenSettings;
+        _jwtTokenSettings = configuration.GetOptions<JwtTokenSettings>();
         _clock = clock;
     }
     
@@ -63,7 +65,9 @@ public class TokenManager: ITokenManager
         var tokenValidationParameters = new TokenValidationParameters()
         {
             ValidateAudience = true,
+            ValidAudience = _jwtTokenSettings.Audience,
             ValidateIssuer = true,
+            ValidIssuer = _jwtTokenSettings.Issuer,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtTokenSettings.Key)),
             ValidateLifetime = false
