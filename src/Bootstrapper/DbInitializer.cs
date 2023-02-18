@@ -19,7 +19,7 @@ internal static class DbInitializer
             .Cast<DbContext>()
             .ToList();
 
-        await context.FirstOrDefault()!.Database.EnsureDeletedAsync();
+        // await context.FirstOrDefault()!.Database.EnsureDeletedAsync();
         
         var migrations = context.Select(x => x.Database.EnsureCreatedAsync());
         await Task.WhenAll(migrations);

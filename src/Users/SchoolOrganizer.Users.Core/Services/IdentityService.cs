@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using SchoolOrganizer.Shared.Abstractions.Auth;
@@ -66,7 +67,7 @@ public class IdentityService: IIdentityService
     public async Task<JwtToken> RefreshToken(JwtToken jwtToken, CancellationToken cancellationToken = default)
     {
         var principal = _tokenManager.GetPrincipalFromExpiredToken(jwtToken.AccesToken);
-        var userId = principal.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
+        var userId = principal.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Sub);
         if (userId is null)
             throw new ClaimNotFound();
         var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Id == new Guid(userId.Value) , cancellationToken);
