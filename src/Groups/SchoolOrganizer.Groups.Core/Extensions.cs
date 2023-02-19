@@ -15,10 +15,4 @@ public static class Extensions
         services.RegisterPostgres<GroupsDbContext>(configuration);
         return services;
     }
-
-    public static IApplicationBuilder UseCore(this IApplicationBuilder app)
-    {
-        return app;
-    }
-
 }

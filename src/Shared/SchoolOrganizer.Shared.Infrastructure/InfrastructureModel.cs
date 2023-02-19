@@ -20,5 +20,8 @@ public class InfrastructureModel : IModule
 
     public void Use(IApplicationBuilder app)
     {
+        app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
     }
 }

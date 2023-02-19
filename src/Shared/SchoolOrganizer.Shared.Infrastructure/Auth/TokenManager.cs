@@ -17,9 +17,9 @@ public class TokenManager: ITokenManager
     private readonly JwtTokenSettings _jwtTokenSettings;
     private readonly IClock _clock;
 
-    public TokenManager(IConfiguration configuration, IClock clock)
+    public TokenManager(JwtTokenSettings jwtTokenSettings, IClock clock)
     {
-        _jwtTokenSettings = configuration.GetOptions<JwtTokenSettings>();
+        _jwtTokenSettings = jwtTokenSettings;
         _clock = clock;
     }
     
@@ -64,11 +64,11 @@ public class TokenManager: ITokenManager
     {
         var tokenValidationParameters = new TokenValidationParameters()
         {
-            ValidateAudience = true,
+            ValidateAudience = _jwtTokenSettings.ValidateAudience,
             ValidAudience = _jwtTokenSettings.Audience,
-            ValidateIssuer = true,
+            ValidateIssuer = _jwtTokenSettings.ValidateIssuer,
             ValidIssuer = _jwtTokenSettings.Issuer,
-            ValidateIssuerSigningKey = true,
+            ValidateIssuerSigningKey = _jwtTokenSettings.ValidateKey,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtTokenSettings.Key)),
             ValidateLifetime = false
         };

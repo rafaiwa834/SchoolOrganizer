@@ -21,12 +21,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-
-foreach (var module in modules)
-{
-    module.Use(app);
-}
-
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -34,7 +28,10 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
-app.UseRouting();
+foreach (var module in modules)
+{
+    module.Use(app);
+}
 
 app.UseEndpoints(endpoints =>
 {
