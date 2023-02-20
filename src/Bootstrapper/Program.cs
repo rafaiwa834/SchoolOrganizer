@@ -1,13 +1,19 @@
 ﻿using Bootstrapper;
+using Bootstrapper.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SchoolOrganizer.Shared.Infrastructure.Configuration;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureModules();
+
+builder.Host.UseSerilog((configuration, loggerConfiguration) => 
+        loggerConfiguration.ReadFrom.Configuration(configuration.Configuration)
+    );
 
 var (assemblies, moduleAssemblies, modules) = AppInitializer.Initialize(builder);
 
@@ -27,6 +33,8 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "SchoolOrganizer");
     c.RoutePrefix = string.Empty;
 });
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 foreach (var module in modules)
 {
