@@ -30,7 +30,7 @@ public class ExceptionMiddleware
             var json = JsonSerializer.Serialize(new {ErrorCode = exception.StatusCode, exception.Message});
             await context.Response.WriteAsync(json);
             
-            _logger.LogError(exception, $"{exception.GetType().Name} Message: {exception.Message}");
+            _logger.LogWarning(exception, $"{exception.GetType().Name} Message: {exception.Message}");
         }
         catch(Exception exception)
         {
