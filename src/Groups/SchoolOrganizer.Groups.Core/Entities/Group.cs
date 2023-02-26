@@ -10,7 +10,7 @@ public class Group
     public string Location { get; set; }
     public bool IsActive { get; set; }
 
-    public void Update(string name, string description, string location)
+    internal void Update(string name, string description, string location)
     {
         Name = name;
         Description = description;

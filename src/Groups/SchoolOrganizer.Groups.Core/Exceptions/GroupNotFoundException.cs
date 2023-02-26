@@ -4,7 +4,7 @@ namespace SchoolOrganizer.Groups.Core.Exceptions;
 
 public class GroupNotFoundException: SchoolOrganizerException
 {
-    public GroupNotFoundException(string Id) : base($"Group {Id} not found")
+    public GroupNotFoundException(string id) : base($"Group {id} not found")
     {
     }
 

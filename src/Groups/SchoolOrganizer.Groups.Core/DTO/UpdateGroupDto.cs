@@ -1,3 +1,9 @@
 namespace SchoolOrganizer.Groups.Core.DTO;
 
-public record UpdateGroupDto(Guid Id, string Name, string Location, string Description);
+public class UpdateGroupDto
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string Location { get; set; }
+    public string Description { get; set; }
+}

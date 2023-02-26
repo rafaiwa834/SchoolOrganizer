@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SchoolOrganizer.Groups.Core.DAL;
 using SchoolOrganizer.Groups.Core.DTO;
 using SchoolOrganizer.Groups.Core.Entities;
@@ -6,13 +7,15 @@ using SchoolOrganizer.Groups.Core.Exceptions;
 
 namespace SchoolOrganizer.Groups.Core.Services;
 
-public class GroupsService
+public class GroupsService: IGroupService
 {
     private readonly GroupsDbContext _dbContext;
+    private readonly ILogger<GroupsService> _logger;
 
-    public GroupsService(GroupsDbContext dbContext)
+    public GroupsService(GroupsDbContext dbContext, ILogger<GroupsService> logger)
     {
         _dbContext = dbContext;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<GroupDto>> GetAll(CancellationToken cancellationToken = default)
@@ -30,7 +33,7 @@ public class GroupsService
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new GroupNotFoundException(id.ToString());
     }
 
-    public async Task Create(CreateGroupDto createGroupDto, CancellationToken cancellationToken = default)
+    public async Task<Guid> Create(CreateGroupDto createGroupDto, CancellationToken cancellationToken = default)
     {
         var group = await _dbContext.Groups.FirstOrDefaultAsync(x => x.Name == createGroupDto.Name, cancellationToken);
         if (group is not null)
@@ -40,10 +43,12 @@ public class GroupsService
             Id = Guid.NewGuid(),
             Name = createGroupDto.Name,
             Description = createGroupDto.Description,
-            Location = createGroupDto.Location
+            Location = createGroupDto.Location,
+            IsActive = true,
         };
         await _dbContext.Groups.AddAsync(group, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
+        return group.Id;
     }
     
     public async Task Update(UpdateGroupDto updateGroupDto, CancellationToken cancellationToken = default)
@@ -59,6 +64,15 @@ public class GroupsService
             throw new GroupNameAlreadyExistsException(updateGroupDto.Name);
 
         group.Update(updateGroupDto.Name, updateGroupDto.Description, updateGroupDto.Location);
+        await _dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task Delete(Guid id, CancellationToken cancellationToken = default)
+    {
+        var group = await _dbContext.Groups.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        if (group is null)
+            throw new GroupNotFoundException(id.ToString());
+        _dbContext.Groups.Remove(group);
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }
