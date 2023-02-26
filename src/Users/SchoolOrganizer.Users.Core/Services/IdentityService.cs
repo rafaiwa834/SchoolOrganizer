@@ -66,7 +66,7 @@ public class IdentityService: IIdentityService
 
     public async Task<JwtToken> RefreshToken(JwtToken jwtToken, CancellationToken cancellationToken = default)
     {
-        var principal = _tokenManager.GetPrincipalFromExpiredToken(jwtToken.AccesToken);
+        var principal = _tokenManager.GetPrincipal(jwtToken.AccesToken);
         var userId = principal.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Sub);
         if (userId is null)
             throw new ClaimNotFound();

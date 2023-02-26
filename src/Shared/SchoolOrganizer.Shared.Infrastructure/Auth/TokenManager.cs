@@ -60,7 +60,7 @@ public class TokenManager: ITokenManager
         }
     }
 
-    public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+    public ClaimsPrincipal GetPrincipal(string token)
     {
         var tokenValidationParameters = new TokenValidationParameters()
         {

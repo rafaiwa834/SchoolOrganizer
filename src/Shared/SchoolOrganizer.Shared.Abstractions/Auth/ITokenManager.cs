@@ -6,5 +6,5 @@ public interface ITokenManager
 {
     string CreateToken(string userId, string userRole, string userEmail);
     public string GenerateRefreshToken();
-    public ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
+    public ClaimsPrincipal GetPrincipal(string token);
 }
