@@ -18,6 +18,7 @@ public class InfrastructureModel : IModule
     {
         services.AddAuth(configuration);
         services.AddScoped<IClock, Clock>();
+        services.AddHttpContextAccessor();
         services.AddSingleton<IUserContext, UserContext>();
     }
 

@@ -2,9 +2,9 @@ using SchoolOrganizer.Shared.Abstractions.Exceptions;
 
 namespace SchoolOrganizer.Users.Core.Exceptions;
 
-public class EmailInUse : SchoolOrganizerException
+public class EmailInUseException : SchoolOrganizerException
 {
-    public EmailInUse() : base("Email is in use")
+    public EmailInUseException() : base("Email is in use")
     {
     }
 

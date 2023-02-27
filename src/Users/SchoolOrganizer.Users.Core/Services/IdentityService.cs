@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 using SchoolOrganizer.Shared.Abstractions.Auth;
 using SchoolOrganizer.Shared.Abstractions.Time;
 using SchoolOrganizer.Users.Core.DAL;
@@ -28,14 +29,14 @@ public class IdentityService: IIdentityService
     {
         var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Email == registerDto.Email, cancellationToken);
         if (user is not null)
-            throw new EmailInUse();
+            throw new EmailInUseException();
         var hashedPassword = HashingService.Hash(registerDto.Password);
         user = new User()
         {
             Id = Guid.NewGuid(),
             Password = hashedPassword,
             Email = registerDto.Email,
-            Role = registerDto.Role?.ToLowerInvariant() ?? "user",
+            Role = registerDto.Role?.ToLowerInvariant() ?? "user" ,
             CreatedAt = _clock.GetDateTimeNow()
         };
         await _usersDbContext.Users.AddAsync(user, cancellationToken);
@@ -46,10 +47,10 @@ public class IdentityService: IIdentityService
     {
         var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Email == loginDto.Email, cancellationToken);
         if (user is null)
-            throw new UserNotFound(loginDto.Email);
+            throw new UserNotFoundException(loginDto.Email);
 
         if (!HashingService.Verify(loginDto.Password, user.Password))
-            throw new InvalidPassword();
+            throw new InvalidPasswordException();
 
         var accessToken = _tokenManager.CreateToken(user.Id.ToString(), user.Role, user.Email);
         var refreshToken = _tokenManager.GenerateRefreshToken();
@@ -69,11 +70,11 @@ public class IdentityService: IIdentityService
         var principal = _tokenManager.GetPrincipal(jwtToken.AccesToken);
         var userId = principal.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Sub);
         if (userId is null)
-            throw new ClaimNotFound();
+            throw new ClaimNotFoundException();
         var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Id == new Guid(userId.Value) , cancellationToken);
         if (user is null || user.RefreshToken != jwtToken.RefreshToken ||
             user.RefreshTokenExpiryTime <= _clock.GetDateTimeNow())
-            throw new FailedRefreshToken();
+            throw new FailedRefreshTokenException();
 
         var newAccesToken = _tokenManager.CreateToken(user.Id.ToString(), user.Role, user.Email);
         var newRefreshToken = _tokenManager.GenerateRefreshToken();

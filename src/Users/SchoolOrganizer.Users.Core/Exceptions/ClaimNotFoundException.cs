@@ -2,9 +2,9 @@ using SchoolOrganizer.Shared.Abstractions.Exceptions;
 
 namespace SchoolOrganizer.Users.Core.Exceptions;
 
-public class ClaimNotFound: SchoolOrganizerException
+public class ClaimNotFoundException: SchoolOrganizerException
 {
-    public ClaimNotFound(): base("Claim not found")
+    public ClaimNotFoundException(): base("Claim not found")
     {
         
     }

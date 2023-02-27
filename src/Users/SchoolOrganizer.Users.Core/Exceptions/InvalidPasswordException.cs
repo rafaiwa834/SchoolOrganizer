@@ -2,9 +2,9 @@ using SchoolOrganizer.Shared.Abstractions.Exceptions;
 
 namespace SchoolOrganizer.Users.Core.Exceptions;
 
-public class InvalidPassword: SchoolOrganizerException
+public class InvalidPasswordException: SchoolOrganizerException
 {
-    public InvalidPassword(): base("Invalid password")
+    public InvalidPasswordException(): base("Invalid password")
     {
     }
 

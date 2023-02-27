@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SchoolOrganizer.Users.Core.DTO;
+using SchoolOrganizer.Users.Core.Services;
 
 namespace SchoolOrganizer.Users.Api.Controllers;
 
@@ -12,10 +14,32 @@ namespace SchoolOrganizer.Users.Api.Controllers;
 [Authorize]
 public class UsersController: ControllerBase
 {
+    private readonly IUserService _userService;
 
-    [HttpGet]
-    public void ChangePassword()
+    public UsersController(IUserService userService)
     {
-        
+        _userService = userService;
+    }
+
+    [HttpPut("password")]
+    public async Task<ActionResult> UpdatePassword([FromBody] UpdatePasswordDto updatePasswordDto)
+    {
+        await _userService.UpdatePassword(updatePasswordDto);
+        return NoContent();
+    }
+    
+    [HttpPut("email")]
+    public async Task<ActionResult> UpdateEmail([FromBody] UpdateEmailDto updateEmailDto)
+    {
+        await _userService.UpdateEmail(updateEmailDto);
+        return NoContent();
+    }
+    
+    [Authorize(Roles = "admin")]
+    [HttpPut("role")]
+    public async Task<ActionResult> UpdateRole([FromBody] UpdateRoleDto updateRoleDto)
+    {
+        await _userService.UpdateRole(updateRoleDto);
+        return NoContent();
     }
 }
