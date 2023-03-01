@@ -1,11 +1,14 @@
 ﻿using Bootstrapper;
 using Bootstrapper.Middlewares;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SchoolOrganizer.Shared.Infrastructure.Configuration;
+using SchoolOrganizer.Shared.Infrastructure.Validation;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +25,9 @@ foreach (var module in modules)
     module.Register(builder.Services, builder.Configuration);
     builder.Services.AddControllers().AddApplicationPart(module.GetType().Assembly);
 }
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblies(moduleAssemblies);
 
 builder.Services.AddSwaggerGen();
 
