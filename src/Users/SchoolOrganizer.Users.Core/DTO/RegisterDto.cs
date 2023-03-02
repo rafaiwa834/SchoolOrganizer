@@ -4,26 +4,24 @@ using SchoolOrganizer.Shared.Abstractions.Auth;
 
 namespace SchoolOrganizer.Users.Core.DTO;
 
-public class RegisterDto
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public string? Role { get; set; }
-}
+public record RegisterDto(string Email, string Password, string? Role);
 
 public class RegisterDtoValidator : AbstractValidator<RegisterDto>
 {
     public RegisterDtoValidator()
     {
         RuleFor(x => x.Email)
-            .NotEmpty()
-            .EmailAddress();
+            .NotEmpty().WithMessage("Email is required")
+            .NotNull().WithMessage("Email is required")
+            .EmailAddress().WithMessage("Incorrect email format");
 
-        RuleFor(p => p.Password).NotEmpty()
-            .MinimumLength(8)
-            .Matches(@"[A-Z]+")
-            .Matches(@"[a-z]+")
-            .Matches(@"[0-9]+")
-            .Matches(@"[\!\?\*\.]+");
+        RuleFor(p => p.Password)
+            .NotEmpty().WithMessage("Password is required")
+            .NotNull().WithMessage("Password is required")
+            .MinimumLength(8).WithMessage("Password must contain at least 8 signs")
+            .Matches(@"[A-Z]+").WithMessage("Use at least one uppercase letter")
+            .Matches(@"[a-z]+").WithMessage("Use at least one lowercase letter")
+            .Matches(@"[0-9]+").WithMessage("Use at least one number")
+            .Matches(@"[\!\?\*\.]+").WithMessage("Use at least one special character");
     }
 }

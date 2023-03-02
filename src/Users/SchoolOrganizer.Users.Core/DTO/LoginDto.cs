@@ -3,22 +3,20 @@ using FluentValidation;
 
 namespace SchoolOrganizer.Users.Core.DTO;
 
-public class LoginDto
-{
-    public string? Email { get; set; }
-    public string Password { get; set; }
-}
+public record LoginDto(string Email, string Password);
 
 public class LoginDtoValidator : AbstractValidator<LoginDto>
 {
     public LoginDtoValidator()
     {
         RuleFor(x => x.Email)
-            .NotEmpty()
-            .EmailAddress();
+            .NotEmpty().WithMessage("Email is required")
+            .NotNull().WithMessage("Email is required")
+            .EmailAddress().WithMessage("Incorrect email format");
 
-        RuleFor(p => p.Password).NotEmpty()
-            .MinimumLength(8)
-            .NotEmpty();
+        RuleFor(p => p.Password)
+            .NotEmpty().WithMessage("Password is required")
+            .NotNull().WithMessage("Password is required")
+            .MinimumLength(8).WithMessage("Password must contain at least 8 signs");
     }
 }
