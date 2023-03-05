@@ -51,14 +51,14 @@ public class GroupsService: IGroupService
         return group.Id;
     }
     
-    public async Task Update(UpdateGroupDto updateGroupDto, CancellationToken cancellationToken = default)
+    public async Task Update(Guid id, UpdateGroupDto updateGroupDto, CancellationToken cancellationToken = default)
     {
-        var group = await _dbContext.Groups.FirstOrDefaultAsync(x => x.Id == updateGroupDto.Id, cancellationToken);
+        var group = await _dbContext.Groups.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         if (group is null)
-            throw new GroupNotFoundException(updateGroupDto.Id.ToString());
+            throw new GroupNotFoundException(id.ToString());
         
         var groupsWithTheSameName = await _dbContext.Groups
-            .Where(x => x.Id != updateGroupDto.Id && x.Name == updateGroupDto.Name)
+            .Where(x => x.Id != id && x.Name == updateGroupDto.Name)
             .AsNoTracking().ToListAsync(cancellationToken);
         if (groupsWithTheSameName.Any())
             throw new GroupNameAlreadyExistsException(updateGroupDto.Name);

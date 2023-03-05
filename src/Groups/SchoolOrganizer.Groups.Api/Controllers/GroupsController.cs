@@ -39,8 +39,7 @@ public class GroupsController: ControllerBase
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> Update(Guid id, [FromBody] UpdateGroupDto updateGroupDto)
     {
-        updateGroupDto.Id = id;
-        await _groupService.Update(updateGroupDto);
+        await _groupService.Update(id, updateGroupDto);
         return NoContent();
     }
 
