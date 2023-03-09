@@ -6,4 +6,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Clients" />
+      <Folder Include="DAL\Configurations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\SchoolOrganizer.Customers.Core\SchoolOrganizer.Customers.Core.csproj" />
+    </ItemGroup>
+
 </Project>

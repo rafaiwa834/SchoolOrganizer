@@ -17,4 +17,5 @@ public class Child
     public Guid GroupId { get; private set; }
     public Guid ParentId { get; private set; }
     public DateTime BirthDate { get; private set; }
+    public Parent Parent { get; private set; }
 }
