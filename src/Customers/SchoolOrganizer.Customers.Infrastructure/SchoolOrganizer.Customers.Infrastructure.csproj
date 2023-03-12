@@ -4,11 +4,11 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>SchoolOrganizer.Customers.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="Clients" />
-      <Folder Include="DAL\Configurations" />
     </ItemGroup>
 
     <ItemGroup>

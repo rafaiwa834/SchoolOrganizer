@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Exceptions" />
+      <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Abstractions\SchoolOrganizer.Shared.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

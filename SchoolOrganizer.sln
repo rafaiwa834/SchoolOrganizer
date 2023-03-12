@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Customers.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Customers.Domain", "src\Customers\SchoolOrganizer.Customers.Domain\SchoolOrganizer.Customers.Domain.csproj", "{74C546EF-8975-4492-87E4-7BA5B0A3C7C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Customers.Intrastructure", "src\Customers\SchoolOrganizer.Customers.Intrastructure\SchoolOrganizer.Customers.Intrastructure.csproj", "{AAC65961-EC75-430F-B82E-A5D38CF778A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Customers.Infrastructure", "src\Customers\SchoolOrganizer.Customers.Infrastructure\SchoolOrganizer.Customers.Infrastructure.csproj", "{AAC65961-EC75-430F-B82E-A5D38CF778A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

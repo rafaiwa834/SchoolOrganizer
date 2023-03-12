@@ -1,8 +1,7 @@
 using FluentValidation;
 using SchoolOrganizer.Shared.Abstractions.Settings;
-using SchoolOrganizer.Shared.Infrastructure.Settings;
 
-namespace SchoolOrganizer.Shared.Abstractions.Auth;
+namespace SchoolOrganizer.Shared.Infrastructure.Auth;
 
 public class JwtTokenSettings: ISettings
 {

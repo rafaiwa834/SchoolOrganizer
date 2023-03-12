@@ -7,4 +7,9 @@
         <RootNamespace>SchoolOrganizer.Api</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Abstractions\SchoolOrganizer.Shared.Abstractions.csproj" />
+      <ProjectReference Include="..\SchoolOrganizer.Customers.Infrastructure\SchoolOrganizer.Customers.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
