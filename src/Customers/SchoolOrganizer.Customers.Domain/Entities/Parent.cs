@@ -4,7 +4,7 @@ public class Parent
 {
     private List<Child> _children = new();
     
-    internal Parent(Guid id, string firstName, string lastName, string email, string phoneNumber,
+    public Parent(Guid id, string firstName, string lastName, string email, string phoneNumber,
         string street, string city, string postalCode, int buildNumber)
     {
         Id = id;

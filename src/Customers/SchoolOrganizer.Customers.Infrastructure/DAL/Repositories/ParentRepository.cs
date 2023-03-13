@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolOrganizer.Customers.Domain.Entities;
-using SchoolOrganizer.Customers.Domain.Exceptions;
 using SchoolOrganizer.Customers.Domain.Repositories;
 
 namespace SchoolOrganizer.Customers.Infrastructure.DAL.Repositories;
@@ -19,16 +18,18 @@ public class ParentRepository : IParentsRepository
     public async Task<Parent> Get(Guid id, CancellationToken cancellationToken = default)
     {
         return await _parentsDbContext
-                   .FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
-               ?? throw new ParentNotFoundException();
+                   .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
-
+    public async Task<Parent> GetByEmail(string email, CancellationToken cancellationToken = default)
+    {
+        return await _parentsDbContext
+                   .SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
+    }
     public async Task<Parent> GetWithChildren(Guid id, CancellationToken cancellationToken = default)
     {
         return await _parentsDbContext
                    .Include(x => x.Children)
-                   .FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
-               ?? throw new ParentNotFoundException();
+                   .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public async Task Create(Parent parent, CancellationToken cancellationToken = default)

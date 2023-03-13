@@ -9,10 +9,10 @@ public class CommandDispatcher: ICommandDispatcher
 
     public CommandDispatcher(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
-    public async Task SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand
+    public async Task SendAsync<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : class, ICommand
     {
         using var scope = _serviceProvider.CreateScope();
         var handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
-        await handler.HandleAsync(command);
+        await handler.HandleAsync(command, cancellationToken);
     }
 }
