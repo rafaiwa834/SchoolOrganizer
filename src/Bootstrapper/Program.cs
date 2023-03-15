@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SchoolOrganizer.Shared.Infrastructure;
 using SchoolOrganizer.Shared.Infrastructure.Configuration;
 using SchoolOrganizer.Shared.Infrastructure.Validation;
 using Serilog;
@@ -20,6 +21,7 @@ builder.Host.UseSerilog((configuration, loggerConfiguration) =>
 
 var (assemblies, moduleAssemblies, modules) = AppInitializer.Initialize(builder);
 
+builder.Services.RegisterInfrastructure(builder.Configuration, assemblies);
 foreach (var module in modules)
 {
     module.Register(builder.Services, builder.Configuration);
@@ -42,6 +44,7 @@ app.UseSwaggerUI(c =>
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseInfrastructure();
 foreach (var module in modules)
 {
     module.Use(app);
