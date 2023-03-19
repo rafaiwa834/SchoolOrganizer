@@ -10,7 +10,7 @@ public class QueryDispatcher: IQueryDispatcher
     public QueryDispatcher(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
 
-    public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
+    public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
     {
         using var scope = _serviceProvider.CreateScope();
         var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
@@ -18,6 +18,6 @@ public class QueryDispatcher: IQueryDispatcher
 
         return await (Task<TResult>) handlerType
             .GetMethod(nameof(IQueryHandler<IQuery<TResult>, TResult>.HandleAsync))
-            ?.Invoke(handler, new[] {query});
+            ?.Invoke(handler, new object[] {query, cancellationToken});
     }
 }

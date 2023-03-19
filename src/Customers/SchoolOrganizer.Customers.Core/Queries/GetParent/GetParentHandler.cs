@@ -13,7 +13,7 @@ public class GetParentHandler: IQueryHandler<GetParent, ParentDto>
     {
         _parentsRepository = parentsRepository;
     }
-    public async Task<ParentDto> HandleAsync(GetParent query, CancellationToken cancellationToken)
+    public async Task<ParentDto> HandleAsync(GetParent query, CancellationToken cancellationToken = default)
     {
         var parent = await _parentsRepository.Get(query.Id, cancellationToken)
             ?? throw new ParentNotFoundException();

@@ -32,7 +32,7 @@ public class ParentController: ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<ParentDto> Get(Guid id)
     {
-        return await _queryDispatcher.QueryAsync(new GetParent(Id: id));
+        return await _queryDispatcher.QueryAsync(new GetParent(Id: id), new CancellationToken());
     }
 
 }
