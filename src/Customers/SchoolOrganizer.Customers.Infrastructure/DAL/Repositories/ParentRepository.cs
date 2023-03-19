@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SchoolOrganizer.Customers.Core.DTO;
 using SchoolOrganizer.Customers.Domain.Entities;
 using SchoolOrganizer.Customers.Domain.Repositories;
 
@@ -15,21 +16,29 @@ public class ParentRepository : IParentsRepository
         _context = dbContext;
     }
 
+    public async Task<IList<Parent>> GetAll(CancellationToken cancellationToken = default)
+    {
+        return await _parentsDbContext
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task<Parent> Get(Guid id, CancellationToken cancellationToken = default)
     {
         return await _parentsDbContext
-                   .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
+
     public async Task<Parent> GetByEmail(string email, CancellationToken cancellationToken = default)
     {
         return await _parentsDbContext
-                   .SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
+            .SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
     }
+
     public async Task<Parent> GetWithChildren(Guid id, CancellationToken cancellationToken = default)
     {
         return await _parentsDbContext
-                   .Include(x => x.Children)
-                   .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+            .Include(x => x.Children)
+            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public async Task Create(Parent parent, CancellationToken cancellationToken = default)

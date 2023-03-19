@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolOrganizer.Customers.Core.Commands.CreateParent;
 using SchoolOrganizer.Customers.Core.DTO;
+using SchoolOrganizer.Customers.Core.Queries.GetAllParents;
 using SchoolOrganizer.Customers.Core.Queries.GetParent;
 using SchoolOrganizer.Shared.Abstractions.Commands;
 using SchoolOrganizer.Shared.Abstractions.Queries;
@@ -29,6 +30,12 @@ public class ParentController: ControllerBase
         return NoContent();
     }
 
+    [HttpGet()]
+    public async Task<IList<ParentDto>> GetAll()
+    {
+        return await _queryDispatcher.QueryAsync(new GetAllParents(), new CancellationToken());
+    }
+    
     [HttpGet("{id:guid}")]
     public async Task<ParentDto> Get(Guid id)
     {

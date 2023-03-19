@@ -4,6 +4,7 @@ namespace SchoolOrganizer.Customers.Domain.Repositories;
 
 public interface IParentsRepository
 {
+    public Task<IList<Parent>> GetAll(CancellationToken cancellationToken);
     public Task<Parent> Get(Guid id, CancellationToken cancellationToken);
     public Task<Parent> GetByEmail(string email, CancellationToken cancellationToken);
     public Task<Parent> GetWithChildren(Guid id, CancellationToken cancellationToken);
