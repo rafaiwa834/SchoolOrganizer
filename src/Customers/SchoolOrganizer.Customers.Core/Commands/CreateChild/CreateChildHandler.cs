@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using SchoolOrganizer.Customers.Domain.Exceptions;
 using SchoolOrganizer.Customers.Domain.Repositories;
 using SchoolOrganizer.Shared.Abstractions.Commands;
 using SchoolOrganizer.Shared.Abstractions.Queries;
@@ -15,8 +16,14 @@ public class CreateChildHandler: ICommandHandler<CreateChild>
         _parentsRepository = parentsRepository;
         _childrenRepository = childrenRepository;
     }
-    public async Task HandleAsync(CreateChild command, CancellationToken cancellationToken)
+    public async Task HandleAsync(CreateChild command, CancellationToken cancellationToken = default)
     {
-        await Task.Delay(2);
+        var parent = await _parentsRepository.Get(command.ParentId, cancellationToken);
+        if (parent is null)
+            throw new ParentNotFoundException();
+        //check if group exists ( call by contract to group module for this group)
+        
+        var child = parent.CreateChild(Guid.NewGuid(), command.GroupId, command.FirstName, command.LastName, command.BirthDate);
+        await _childrenRepository.Create(child, cancellationToken);
     }
 }

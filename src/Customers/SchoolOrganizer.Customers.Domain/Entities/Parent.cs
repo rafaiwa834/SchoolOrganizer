@@ -29,7 +29,7 @@ public class Parent
     public string PostalCode { get; private set; }
     public IReadOnlyCollection<Child> Children => _children;
 
-    internal Child CreateChild(Guid id, Guid groupId , string firstName, string lastName, DateTime birthDate)
+    public Child CreateChild(Guid id, Guid groupId , string firstName, string lastName, DateTime birthDate)
     {
         var child = new Child(id, Id, groupId, firstName, lastName, birthDate);
         _children.Add(child);
