@@ -11,7 +11,7 @@ namespace SchoolOrganizer.Api.Controllers;
 
 [ApiController]
 [Tags(CustomersModule.BasePath)]
-[Route(CustomersModule.BasePath)]
+[Route(CustomersModule.BasePath + "/[controller]")]
 public class ParentController: ControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;

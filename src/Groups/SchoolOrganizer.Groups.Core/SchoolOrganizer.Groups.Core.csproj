@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\SchoolOrganizer.Groups.Contracts\SchoolOrganizer.Groups.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

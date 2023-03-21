@@ -8,7 +8,7 @@ using SchoolOrganizer.Shared.Abstractions.Queries;
 namespace SchoolOrganizer.Api.Controllers;
 [ApiController]
 [Tags(CustomersModule.BasePath)]
-[Route(CustomersModule.BasePath)]
+[Route(CustomersModule.BasePath + "/[controller]")]
 public class ChildrenController: ControllerBase
 {
     private readonly IQueryDispatcher _queryDispatcher;
@@ -21,7 +21,7 @@ public class ChildrenController: ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreatedResult([FromBody] CreateChild createChild)
+    public async Task<ActionResult> Created([FromBody] CreateChild createChild)
     {
         await _commandDispatcher.SendAsync(createChild, new CancellationToken());
         return NoContent();

@@ -1,3 +1,5 @@
+using SchoolOrganizer.Customers.Domain.Exceptions;
+
 namespace SchoolOrganizer.Customers.Domain.Entities;
 
 public class Parent
@@ -31,6 +33,8 @@ public class Parent
 
     public Child CreateChild(Guid id, Guid groupId , string firstName, string lastName, DateTime birthDate)
     {
+        if(_children.Any(x => x.ParentId == Id && x.FirstName == firstName && x.LastName == lastName))
+            throw new ChildIdentitiesExistsException();
         var child = new Child(id, Id, groupId, firstName, lastName, birthDate);
         _children.Add(child);
         return child;

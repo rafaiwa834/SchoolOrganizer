@@ -18,7 +18,7 @@ public class ParentRepository : IParentsRepository
 
     public async Task<IList<Parent>> GetAll(CancellationToken cancellationToken = default)
     {
-        return await _parentsDbContext
+        return await _parentsDbContext.AsNoTracking()
             .ToListAsync(cancellationToken);
     }
 

@@ -2,7 +2,7 @@ using SchoolOrganizer.Groups.Core.DTO;
 
 namespace SchoolOrganizer.Groups.Core.Services;
 
-public interface IGroupService
+public interface IGroupsService
 {
     public Task<IEnumerable<GroupDto>> GetAll(CancellationToken cancellationToken = default);
     public Task<GroupDto> Get(Guid id, CancellationToken cancellationToken = default);

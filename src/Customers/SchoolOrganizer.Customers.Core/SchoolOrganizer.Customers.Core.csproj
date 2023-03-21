@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Groups\SchoolOrganizer.Groups.Contracts\SchoolOrganizer.Groups.Contracts.csproj" />
       <ProjectReference Include="..\SchoolOrganizer.Customers.Domain\SchoolOrganizer.Customers.Domain.csproj" />
     </ItemGroup>
 

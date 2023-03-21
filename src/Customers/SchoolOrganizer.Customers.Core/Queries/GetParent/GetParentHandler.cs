@@ -15,11 +15,11 @@ public class GetParentHandler: IQueryHandler<GetParent, ParentDto>
     }
     public async Task<ParentDto> HandleAsync(GetParent query, CancellationToken cancellationToken = default)
     {
-        var parent = await _parentsRepository.Get(query.Id, cancellationToken)
+        var parent = await _parentsRepository.GetWithChildren(query.Id, cancellationToken)
             ?? throw new ParentNotFoundException();
 
         return new ParentDto(
-            Id: parent.Id,
+            Id: parent.Id, //tutaj jest błąd bo po probie stworzenia tego dto jest error, to tez
             FirstName: parent.FirstName,
             LastName: parent.LastName,
             Email: parent.Email,
@@ -27,7 +27,7 @@ public class GetParentHandler: IQueryHandler<GetParent, ParentDto>
             Street: parent.Street,
             City: parent.City,
             BuildNumber: parent.BuildNumber,
-            PostalCode: parent.PostalCode
-            );
+            PostalCode: parent.PostalCode,
+            Children: parent.Children.ToList()); // ten błąd też może być tym spowodowany
     }
 }

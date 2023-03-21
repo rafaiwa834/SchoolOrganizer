@@ -7,12 +7,12 @@ using SchoolOrganizer.Groups.Core.Exceptions;
 
 namespace SchoolOrganizer.Groups.Core.Services;
 
-public class GroupsService: IGroupService
+public class GroupsesService: IGroupsService
 {
     private readonly GroupsDbContext _dbContext;
-    private readonly ILogger<GroupsService> _logger;
+    private readonly ILogger<GroupsesService> _logger;
 
-    public GroupsService(GroupsDbContext dbContext, ILogger<GroupsService> logger)
+    public GroupsesService(GroupsDbContext dbContext, ILogger<GroupsesService> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
