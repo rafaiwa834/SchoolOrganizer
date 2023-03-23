@@ -5,7 +5,7 @@ using SchoolOrganizer.Shared.Abstractions.Queries;
 
 namespace SchoolOrganizer.Customers.Core.Queries.GetParent;
 
-public class GetParentHandler: IQueryHandler<GetParent, ParentDto>
+public class GetParentHandler : IQueryHandler<GetParent, ParentDto>
 {
     private readonly IParentsRepository _parentsRepository;
 
@@ -13,13 +13,14 @@ public class GetParentHandler: IQueryHandler<GetParent, ParentDto>
     {
         _parentsRepository = parentsRepository;
     }
+
     public async Task<ParentDto> HandleAsync(GetParent query, CancellationToken cancellationToken = default)
     {
         var parent = await _parentsRepository.GetWithChildren(query.Id, cancellationToken)
-            ?? throw new ParentNotFoundException();
+                     ?? throw new ParentNotFoundException();
 
         return new ParentDto(
-            Id: parent.Id, //tutaj jest błąd bo po probie stworzenia tego dto jest error, to tez
+            Id: parent.Id,
             FirstName: parent.FirstName,
             LastName: parent.LastName,
             Email: parent.Email,
@@ -28,6 +29,8 @@ public class GetParentHandler: IQueryHandler<GetParent, ParentDto>
             City: parent.City,
             BuildNumber: parent.BuildNumber,
             PostalCode: parent.PostalCode,
-            Children: parent.Children.ToList()); // ten błąd też może być tym spowodowany
+            Children: parent.Children.Select(
+                x => new ChildDto(x.Id, x.ParentId, x.GroupId, x.FirstName, x.LastName, x.BirthDate)
+            ).ToList());
     }
 }
