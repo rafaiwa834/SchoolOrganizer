@@ -9,7 +9,7 @@ namespace SchoolOrganizer.Groups.Api.Controllers;
 [ApiController]
 [Tags(GroupsModule.BasePath)]
 [Route(GroupsModule.BasePath)]
-// [Authorize]
+[Authorize]
 public class GroupsController: ControllerBase
 {
     private readonly IGroupsService _groupsService;
