@@ -1,3 +1,5 @@
+using System.Data;
+
 namespace SchoolOrganizer.Customers.Domain.Entities;
 
 public class Child
@@ -18,4 +20,9 @@ public class Child
     public Guid ParentId { get; private set; }
     public DateTime BirthDate { get; private set; }
     public Parent Parent { get; private set; }
+
+    public void Update(Guid groupId)
+    {
+        GroupId = groupId;
+    }
 }

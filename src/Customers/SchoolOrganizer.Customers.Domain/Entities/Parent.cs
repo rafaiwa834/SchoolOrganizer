@@ -39,4 +39,16 @@ public class Parent
         _children.Add(child);
         return child;
     }
+
+    public void Update(string lastName, string email, string phoneNumber,
+        string street, int buildNumber, string city, string postalCode)
+    {
+        LastName = lastName;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        Street = street;
+        BuildNumber = buildNumber;
+        City = city;
+        PostalCode = postalCode;
+    }
 }

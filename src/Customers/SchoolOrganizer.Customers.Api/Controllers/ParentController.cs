@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolOrganizer.Customers.Core.Commands.CreateParent;
+using SchoolOrganizer.Customers.Core.Commands.UpdateParent;
 using SchoolOrganizer.Customers.Core.DTO;
 using SchoolOrganizer.Customers.Core.Queries.GetAllParents;
 using SchoolOrganizer.Customers.Core.Queries.GetParent;
@@ -30,7 +31,14 @@ public class ParentController: ControllerBase
         return NoContent();
     }
 
-    [HttpGet()]
+    [HttpPut()]
+    public async Task<ActionResult> Update([FromBody] UpdateParent updateParent)
+    {
+        await _commandDispatcher.SendAsync(updateParent, new CancellationToken());
+        return NoContent();
+    }
+
+    [HttpGet]
     public async Task<IList<ParentDto>> GetAll()
     {
         return await _queryDispatcher.QueryAsync(new GetAllParents(), new CancellationToken());
@@ -41,5 +49,7 @@ public class ParentController: ControllerBase
     {
         return await _queryDispatcher.QueryAsync(new GetParent(Id: id), new CancellationToken());
     }
+    
+    
 
 }
