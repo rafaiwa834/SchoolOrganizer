@@ -4,7 +4,7 @@ using SchoolOrganizer.Shared.Abstractions.Auth;
 
 namespace SchoolOrganizer.Users.Core.DTO;
 
-public record RegisterDto(string Email, string Password, string? Role);
+public record RegisterDto(string Email, string Password);
 
 public class RegisterDtoValidator : AbstractValidator<RegisterDto>
 {

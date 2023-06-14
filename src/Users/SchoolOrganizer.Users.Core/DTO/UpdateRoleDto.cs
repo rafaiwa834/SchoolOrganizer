@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace SchoolOrganizer.Users.Core.DTO;
 
-public record UpdateRoleDto(Guid Id, string Role );
+public record UpdateRoleDto(Guid Id, int RoleId);
 
 public class UpdateRoleDtoValidator : AbstractValidator<UpdateRoleDto>
 {
@@ -12,9 +12,8 @@ public class UpdateRoleDtoValidator : AbstractValidator<UpdateRoleDto>
             .NotNull().WithMessage("Id is required")
             .NotEmpty().WithMessage("Id is required");
 
-        RuleFor(x => x.Role)
+        RuleFor(x => x.RoleId)
             .NotNull().WithMessage("Role is required")
-            .NotEmpty().WithMessage("Role is required")
-            .Must(x => x is "admin" or "user").WithMessage("Incorrect role");
+            .NotEmpty().WithMessage("Role is required");
     }
 }

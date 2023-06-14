@@ -3,13 +3,11 @@ using Bootstrapper.Middlewares;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SchoolOrganizer.Shared.Infrastructure;
 using SchoolOrganizer.Shared.Infrastructure.Configuration;
-using SchoolOrganizer.Shared.Infrastructure.Validation;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,7 +31,7 @@ builder.Services.AddValidatorsFromAssemblies(moduleAssemblies);
 
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.SwaggerDoc("v1", new OpenApiInfo(){Title = "SchooldOrganizer", Version = "v1"});
+    opt.SwaggerDoc("v1", new OpenApiInfo(){Title = "SchoolOrganizer", Version = "v1"});
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
         In = ParameterLocation.Header,

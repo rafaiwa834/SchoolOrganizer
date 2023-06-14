@@ -46,10 +46,13 @@ public class UserService: IUserService
 
     public async Task UpdateRole(UpdateRoleDto updateRoleDto, CancellationToken cancellationToken = default)
     {
-        var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == updateRoleDto.Id, cancellationToken);
+        var user = await _dbContext.Users.Include(x=> x.Role).FirstOrDefaultAsync(x => x.Id == updateRoleDto.Id, cancellationToken);
         if (user is null)
             throw new UserNotFoundException(updateRoleDto.Id.ToString());
-        user.Role = updateRoleDto.Role;
+        var role = await _dbContext.Roles.FirstOrDefaultAsync(x => x.Id == updateRoleDto.RoleId);
+        if (role is null)
+            throw new RoleNotFoundException(updateRoleDto.RoleId.ToString());
+        user.RoleId = updateRoleDto.RoleId;
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
     

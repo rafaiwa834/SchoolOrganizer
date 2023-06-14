@@ -30,13 +30,16 @@ public class IdentityService: IIdentityService
         var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Email == registerDto.Email, cancellationToken);
         if (user is not null)
             throw new EmailInUseException();
+        var role = await _usersDbContext.Roles.FirstOrDefaultAsync(x => x.Name.Contains("user"));
+        if (role is null)
+            throw new RoleNotFoundException("user");
         var hashedPassword = HashingService.Hash(registerDto.Password);
         user = new User()
         {
             Id = Guid.NewGuid(),
             Password = hashedPassword,
             Email = registerDto.Email,
-            Role = registerDto.Role?.ToLowerInvariant() ?? "user" ,
+            RoleId = role.Id,
             CreatedAt = _clock.GetDateTimeNow()
         };
         await _usersDbContext.Users.AddAsync(user, cancellationToken);
@@ -45,14 +48,14 @@ public class IdentityService: IIdentityService
 
     public async Task<JwtToken> Login(LoginDto loginDto, CancellationToken cancellationToken= default)
     {
-        var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Email == loginDto.Email, cancellationToken);
+        var user = await _usersDbContext.Users.Include(x=>x.Role).FirstOrDefaultAsync(x => x.Email == loginDto.Email, cancellationToken);
         if (user is null)
             throw new UserNotFoundException(loginDto.Email);
 
         if (!HashingService.Verify(loginDto.Password, user.Password))
             throw new InvalidPasswordException();
 
-        var accessToken = _tokenManager.CreateToken(user.Id.ToString(), user.Role, user.Email);
+        var accessToken = _tokenManager.CreateToken(user.Id.ToString(), user.Role.Name, user.Email);
         var refreshToken = _tokenManager.GenerateRefreshToken();
         user.RefreshToken = refreshToken;
         user.RefreshTokenExpiryTime = _clock.GetDateTimeNow().AddHours(8);
@@ -71,12 +74,12 @@ public class IdentityService: IIdentityService
         var userId = principal.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Sub);
         if (userId is null)
             throw new ClaimNotFoundException();
-        var user = await _usersDbContext.Users.FirstOrDefaultAsync(x => x.Id == new Guid(userId.Value) , cancellationToken);
+        var user = await _usersDbContext.Users.Include(x=>x.Role).FirstOrDefaultAsync(x => x.Id == new Guid(userId.Value) , cancellationToken);
         if (user is null || user.RefreshToken != jwtToken.RefreshToken ||
             user.RefreshTokenExpiryTime <= _clock.GetDateTimeNow())
             throw new FailedRefreshTokenException();
 
-        var newAccesToken = _tokenManager.CreateToken(user.Id.ToString(), user.Role, user.Email);
+        var newAccesToken = _tokenManager.CreateToken(user.Id.ToString(), user.Role.Name, user.Email);
         var newRefreshToken = _tokenManager.GenerateRefreshToken();
         user.RefreshToken = newRefreshToken;
         user.RefreshTokenExpiryTime = _clock.GetDateTimeNow().AddHours(8);
