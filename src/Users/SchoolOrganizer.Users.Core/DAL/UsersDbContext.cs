@@ -16,6 +16,7 @@ public class UsersDbContext : DbContext
     {
         if (Database.IsRelational()) modelBuilder.HasDefaultSchema("Users");
         modelBuilder.ApplyConfiguration(new UsersDbConfiguration());
+        modelBuilder.SeedRoles();
         base.OnModelCreating(modelBuilder);
     }
 }
