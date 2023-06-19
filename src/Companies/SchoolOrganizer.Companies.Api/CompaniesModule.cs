@@ -17,6 +17,5 @@ public class CompaniesModule: IModule
 
     public void Use(IApplicationBuilder app)
     {
-        throw new NotImplementedException();
     }
 }

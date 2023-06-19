@@ -15,7 +15,7 @@ public class User
     public Role Role { get; set; }
     public int RoleId { get; set; }
 
-    public int CompanyId { get; set; }
-    public CompanyContract Company { get; set; }
+    public Guid CompanyId { get; set; }
+    public Company Company { get; set; }
 
 }
