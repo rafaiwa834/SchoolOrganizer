@@ -36,6 +36,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Customers.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Groups.Contracts", "src\Groups\SchoolOrganizer.Groups.Contracts\SchoolOrganizer.Groups.Contracts.csproj", "{59278A38-C6E2-4E44-801E-1C5BCE71CC08}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Companies", "Companies", "{7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Companies.Api", "src\Companies\SchoolOrganizer.Companies.Api\SchoolOrganizer.Companies.Api.csproj", "{AEC500FA-40D3-4C47-A2FF-5A159105479C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Companies.Core", "src\Companies\SchoolOrganizer.Companies.Core\SchoolOrganizer.Companies.Core.csproj", "{CB75FAEF-13BF-4DB7-9CF8-997F940346FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Companies.Contracts", "src\Companies\SchoolOrganizer.Companies.Contracts\SchoolOrganizer.Companies.Contracts.csproj", "{F349E1FB-624C-4264-B319-62A66A326220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +66,10 @@ Global
 		{74C546EF-8975-4492-87E4-7BA5B0A3C7C6} = {43336DAB-10DF-4F06-B06C-49A970E8124F}
 		{AAC65961-EC75-430F-B82E-A5D38CF778A1} = {43336DAB-10DF-4F06-B06C-49A970E8124F}
 		{59278A38-C6E2-4E44-801E-1C5BCE71CC08} = {192CC742-92DD-4718-8084-C19A1F2BC48E}
+		{7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4} = {AA41E0F4-09E3-471D-999A-CF9DDA50B8B4}
+		{AEC500FA-40D3-4C47-A2FF-5A159105479C} = {7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4}
+		{CB75FAEF-13BF-4DB7-9CF8-997F940346FC} = {7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4}
+		{F349E1FB-624C-4264-B319-62A66A326220} = {7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{327E2EC3-2092-448F-A200-2249C9E79757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -108,5 +120,17 @@ Global
 		{59278A38-C6E2-4E44-801E-1C5BCE71CC08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59278A38-C6E2-4E44-801E-1C5BCE71CC08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59278A38-C6E2-4E44-801E-1C5BCE71CC08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC500FA-40D3-4C47-A2FF-5A159105479C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC500FA-40D3-4C47-A2FF-5A159105479C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC500FA-40D3-4C47-A2FF-5A159105479C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC500FA-40D3-4C47-A2FF-5A159105479C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB75FAEF-13BF-4DB7-9CF8-997F940346FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB75FAEF-13BF-4DB7-9CF8-997F940346FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB75FAEF-13BF-4DB7-9CF8-997F940346FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB75FAEF-13BF-4DB7-9CF8-997F940346FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F349E1FB-624C-4264-B319-62A66A326220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F349E1FB-624C-4264-B319-62A66A326220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F349E1FB-624C-4264-B319-62A66A326220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F349E1FB-624C-4264-B319-62A66A326220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
