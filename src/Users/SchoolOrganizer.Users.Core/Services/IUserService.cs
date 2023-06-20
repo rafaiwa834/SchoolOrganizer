@@ -7,4 +7,6 @@ public interface IUserService
     public Task UpdateRole(UpdateRoleDto updateRoleDto, CancellationToken cancellationToken = default);
     public Task UpdateEmail(UpdateEmailDto updateEmailDto, CancellationToken cancellationToken = default);
     public Task UpdatePassword(UpdatePasswordDto updatePasswordDto, CancellationToken cancellationToken = default);
+    public Task AssignToCompany(Guid userId, Guid comapnyId, CancellationToken cancellationToken = default);
+
 }

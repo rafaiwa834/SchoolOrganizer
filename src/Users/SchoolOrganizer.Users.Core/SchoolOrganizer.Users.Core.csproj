@@ -10,6 +10,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Companies\SchoolOrganizer.Companies.Contracts\SchoolOrganizer.Companies.Contracts.csproj" />
       <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\SchoolOrganizer.Users.Contracts\SchoolOrganizer.Users.Contracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>

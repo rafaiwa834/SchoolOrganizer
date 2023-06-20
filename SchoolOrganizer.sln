@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Companies.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Companies.Contracts", "src\Companies\SchoolOrganizer.Companies.Contracts\SchoolOrganizer.Companies.Contracts.csproj", "{F349E1FB-624C-4264-B319-62A66A326220}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOrganizer.Users.Contracts", "src\Users\SchoolOrganizer.Users.Contracts\SchoolOrganizer.Users.Contracts.csproj", "{4FA204C2-5486-4392-B218-4D6C572ECA69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,7 @@ Global
 		{AEC500FA-40D3-4C47-A2FF-5A159105479C} = {7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4}
 		{CB75FAEF-13BF-4DB7-9CF8-997F940346FC} = {7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4}
 		{F349E1FB-624C-4264-B319-62A66A326220} = {7F8A1D4B-768C-43E7-94F6-A9B50E8B54D4}
+		{4FA204C2-5486-4392-B218-4D6C572ECA69} = {FEE60E63-9E1B-44D3-A7B4-FFF6BCACB95B}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{327E2EC3-2092-448F-A200-2249C9E79757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -132,5 +135,9 @@ Global
 		{F349E1FB-624C-4264-B319-62A66A326220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F349E1FB-624C-4264-B319-62A66A326220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F349E1FB-624C-4264-B319-62A66A326220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA204C2-5486-4392-B218-4D6C572ECA69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA204C2-5486-4392-B218-4D6C572ECA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA204C2-5486-4392-B218-4D6C572ECA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA204C2-5486-4392-B218-4D6C572ECA69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

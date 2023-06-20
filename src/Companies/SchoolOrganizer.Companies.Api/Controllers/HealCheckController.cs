@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace SchoolOrganizer.Companies.Api.Controllers;
 
 [ApiController]
-[Tags(CompaniesModule.BasePAth)]
-[Route(CompaniesModule.BasePAth)]
+[Tags(CompaniesModule.BasePath)]
+[Route(CompaniesModule.BasePath)]
 public class HealCheckController: ControllerBase
 {
     [HttpGet("healthcheck")]

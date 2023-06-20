@@ -9,7 +9,7 @@ namespace SchoolOrganizer.Companies.Api;
 public class CompaniesModule: IModule
 {
     public string Name { get; } = "Companies";
-    public const string BasePAth = "companies";
+    public const string BasePath = "companies";
     public void Register(IServiceCollection services, IConfiguration configuration)
     {
         services.AddCore(configuration);

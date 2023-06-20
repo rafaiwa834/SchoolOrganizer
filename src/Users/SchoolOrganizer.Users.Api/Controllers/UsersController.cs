@@ -42,4 +42,12 @@ public class UsersController: ControllerBase
         await _userService.UpdateRole(updateRoleDto);
         return NoContent();
     }
+    
+    [Authorize(Roles = "admin,owner")]
+    [HttpPut("assign")]
+    public async Task<ActionResult> AssignToCompany([FromHeader] Guid userId, [FromHeader] Guid companyId)
+    {
+        await _userService.AssignToCompany(userId, companyId);
+        return NoContent();
+    }
 }

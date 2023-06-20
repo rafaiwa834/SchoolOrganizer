@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SchoolOrganizer.Companies.Contracts;
 using SchoolOrganizer.Shared.Abstractions.Context;
 using SchoolOrganizer.Users.Core.DAL;
 using SchoolOrganizer.Users.Core.DTO;
@@ -10,11 +11,13 @@ public class UserService: IUserService
 {
     private readonly UsersDbContext _dbContext;
     private readonly IUserContext _userContext;
+    private readonly ICompaniesModuleApi _companiesModuleApi;
 
-    public UserService(UsersDbContext dbContext, IUserContext userContext)
+    public UserService(UsersDbContext dbContext, IUserContext userContext, ICompaniesModuleApi companiesModuleApi)
     {
         _dbContext = dbContext;
         _userContext = userContext;
+        _companiesModuleApi = companiesModuleApi;
     }
 
     public async Task UpdatePassword(UpdatePasswordDto updatePasswordDto, CancellationToken cancellationToken = default)
@@ -53,6 +56,17 @@ public class UserService: IUserService
         if (role is null)
             throw new RoleNotFoundException(updateRoleDto.RoleId.ToString());
         user.RoleId = updateRoleDto.RoleId;
+        await _dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task AssignToCompany(Guid userId, Guid comapnyId, CancellationToken cancellationToken = default)
+    {
+        var user = await _dbContext.Users.Include(x=> x.Role).FirstOrDefaultAsync(x => x.Id == userId, cancellationToken);
+        if (user is null)
+            throw new UserNotFoundException(userId.ToString());
+        if (await _companiesModuleApi.CheckIfExists(comapnyId, cancellationToken))
+            throw new CompanyNotFoundException(comapnyId.ToString());
+        user.CompanyId = comapnyId;
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
     

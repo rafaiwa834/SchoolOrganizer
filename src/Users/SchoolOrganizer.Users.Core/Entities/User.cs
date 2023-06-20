@@ -16,6 +16,4 @@ public class User
     public int RoleId { get; set; }
 
     public Guid CompanyId { get; set; }
-    public Company Company { get; set; }
-
 }

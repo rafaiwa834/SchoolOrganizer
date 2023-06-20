@@ -13,6 +13,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Users\SchoolOrganizer.Users.Contracts\SchoolOrganizer.Users.Contracts.csproj" />
+      <ProjectReference Include="..\SchoolOrganizer.Companies.Contracts\SchoolOrganizer.Companies.Contracts.csproj" />
     </ItemGroup>
 
 </Project>
