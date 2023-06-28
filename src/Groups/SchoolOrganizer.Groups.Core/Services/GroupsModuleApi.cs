@@ -16,7 +16,6 @@ public class GroupsModuleApi : IGroupsModuleApi
 
     public async Task<bool> CheckIfGroupExist(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _groupsDbContext.FirstOrDefaultAsync(x => x.Id == id, cancellationToken) is not null 
-            ? true : false;
+        return await _groupsDbContext.FirstOrDefaultAsync(x => x.Id == id, cancellationToken) is not null ? true : false;
     }
 }

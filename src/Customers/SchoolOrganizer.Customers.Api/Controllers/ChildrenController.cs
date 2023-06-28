@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolOrganizer.Customers.Core.Commands;
@@ -19,7 +20,8 @@ public class ChildrenController: ControllerBase
         _commandDispatcher = commandDispatcher;
         _queryDispatcher = queryDispatcher;
     }
-
+    
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> Created([FromBody] CreateChild createChild)
     {

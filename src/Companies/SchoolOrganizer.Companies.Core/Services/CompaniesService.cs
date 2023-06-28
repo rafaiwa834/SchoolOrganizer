@@ -8,7 +8,7 @@ using SchoolOrganizer.Users.Contracts;
 
 namespace SchoolOrganizer.Companies.Core.Services;
 
-public class CompaniesService
+public class CompaniesService: ICompanyService
 {
     private readonly DbSet<Company> companiesDbContext;
     private readonly CompaniesDbContext dbContext;
@@ -23,7 +23,7 @@ public class CompaniesService
         this.usersModuleApi = usersModuleApi;
     }
 
-    public async void Create(CreateCompany createCompany, CancellationToken cancellationToken)
+    public async Task Create(CreateCompany createCompany, CancellationToken cancellationToken)
     {
         var userId = userContext.UserId ?? throw new UserIdNotFound();
         var company = new Company()
@@ -36,5 +36,11 @@ public class CompaniesService
         await companiesDbContext.AddAsync(company, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
-    
+
+    public async Task<IEnumerable<CompanyDto>> GetAll(CancellationToken cancellationToken)
+    {
+        return await companiesDbContext.Select(x => 
+            new CompanyDto() {Id = x.Id, Description = x.Description, Name = x.Name})
+            .AsNoTracking().ToListAsync(cancellationToken);
+    }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolOrganizer.Customers.Core.Commands.CreateParent;
@@ -23,15 +24,17 @@ public class ParentController: ControllerBase
         _commandDispatcher = commandDispatcher;
         _queryDispatcher = queryDispatcher;
     }
-
+    
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> Create([FromBody] CreateParent createParent)
     {
         await _commandDispatcher.SendAsync(createParent, new CancellationToken());
         return NoContent();
     }
-
-    [HttpPut()]
+    
+    [Authorize]
+    [HttpPut]
     public async Task<ActionResult> Update([FromBody] UpdateParent updateParent)
     {
         await _commandDispatcher.SendAsync(updateParent, new CancellationToken());
@@ -49,7 +52,4 @@ public class ParentController: ControllerBase
     {
         return await _queryDispatcher.QueryAsync(new GetParent(Id: id), new CancellationToken());
     }
-    
-    
-
 }
