@@ -6,7 +6,8 @@ namespace SchoolOrganizer.Groups.Core.DAL;
 
 public class GroupsDbContext : DbContext
 {
-    public DbSet<Group> Groups { get; set; }
+    public DbSet<Group> Groups => Set<Group>();
+    public DbSet<Schedule> Schedules => Set<Schedule>();
     public GroupsDbContext(DbContextOptions<GroupsDbContext> options) : base(options)
     {
     }
