@@ -30,4 +30,18 @@ public class SchedulesController: ControllerBase
         await _scheduleService.Delete(scheduleId, new CancellationToken());
         return NoContent();
     }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult> Update(Guid id, [FromBody] UpdateScheduleDto updateScheduleDto)
+    {
+        await _scheduleService.Update(id, updateScheduleDto, new CancellationToken());
+        return NoContent();
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<ScheduleDto>> Get(Guid groupId, DateTime from, DateTime to)
+    {
+        var schedules = await _scheduleService.Get(groupId, from, to, new CancellationToken());
+        return Ok(schedules);
+    }
 }
