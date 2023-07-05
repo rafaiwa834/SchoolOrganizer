@@ -54,8 +54,25 @@ public class SchedulesService: IScheduleService
     {
         fromThisDate = fromThisDate.Date;
         toThisDate = toThisDate.Date;
-        return await _dbContext.Schedules.Where(x => x.GroupId == groupId && x.Date <= toThisDate && x.Date >= fromThisDate)
-            .Select(x=> new ScheduleDto(){Id = x.Id, Date = x.Date, Hour = x.Hour, Period = x.Period, GroupId = x.GroupId})
+        return await _dbContext.Schedules.Include(x=>x.Attendance).Where(x => x.GroupId == groupId && x.Date <= toThisDate && x.Date >= fromThisDate)
+            .Select(x=> new ScheduleDto(){Id = x.Id, Date = x.Date, Hour = x.Hour, Period = x.Period, GroupId = x.GroupId, Attendance = ConvertAttendancesEntityToDto(x.Attendance)})
             .ToListAsync(cancellationToken);
+    }
+
+    private List<AttendanceDto> ConvertAttendancesEntityToDto(List<Attendance> attendances)
+    {
+        List<AttendanceDto> attendanceDtos = new List<AttendanceDto>();
+        foreach (var attendance in attendances)
+        {
+            attendanceDtos.Add(new AttendanceDto()
+            {
+                Id = attendance.Id,
+                ChildrenId = attendance.ChildrenId,
+                IsPresent = attendance.IsPresent,
+                ScheduleId = attendance.ScheduleId
+            });
+        }
+
+        return attendanceDtos;
     }
 }

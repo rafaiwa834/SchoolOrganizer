@@ -7,4 +7,5 @@ public class ScheduleDto
     public int Hour { get; set; }
     public float Period { get; set; }
     public Guid GroupId { get; set; }
+    public List<AttendanceDto> Attendance { get; set; }
 }

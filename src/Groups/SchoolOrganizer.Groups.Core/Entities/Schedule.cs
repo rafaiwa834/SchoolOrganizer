@@ -8,4 +8,5 @@ public class Schedule
     public float Period { get; set; }
     public Guid GroupId { get; set; }
     public Group Group { get; set; }
+    public List<Attendance> Attendance { get; set; }
 }
