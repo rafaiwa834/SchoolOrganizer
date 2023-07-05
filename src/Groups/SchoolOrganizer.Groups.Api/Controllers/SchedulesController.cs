@@ -39,9 +39,9 @@ public class SchedulesController: ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<ScheduleDto>> Get(Guid groupId, DateTime from, DateTime to)
+    public async Task<ActionResult<ScheduleDto>> Get(Guid groupId, DateTime fromThisDate, DateTime toThisDate)
     {
-        var schedules = await _scheduleService.Get(groupId, from, to, new CancellationToken());
+        var schedules = await _scheduleService.Get(groupId, fromThisDate, toThisDate, new CancellationToken());
         return Ok(schedules);
     }
 }

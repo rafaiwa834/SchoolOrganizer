@@ -25,7 +25,7 @@ public class SchedulesService: IScheduleService
         await _dbContext.Schedules.AddAsync(new Schedule()
         {
             Id = createScheduleDto.Id,
-            Date = createScheduleDto.Date,
+            Date = createScheduleDto.Date.Date,
             GroupId = createScheduleDto.GroupId,
             Hour = createScheduleDto.Hour,
             Period = createScheduleDto.Period
@@ -50,9 +50,11 @@ public class SchedulesService: IScheduleService
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<ScheduleDto>> Get(Guid groupId, DateTime from, DateTime to, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ScheduleDto>> Get(Guid groupId, DateTime fromThisDate, DateTime toThisDate, CancellationToken cancellationToken)
     {
-        return await _dbContext.Schedules.Where(x => x.GroupId == groupId && x.Date <= to && x.Date >= from)
+        fromThisDate = fromThisDate.Date;
+        toThisDate = toThisDate.Date;
+        return await _dbContext.Schedules.Where(x => x.GroupId == groupId && x.Date <= toThisDate && x.Date >= fromThisDate)
             .Select(x=> new ScheduleDto(){Id = x.Id, Date = x.Date, Hour = x.Hour, Period = x.Period, GroupId = x.GroupId})
             .ToListAsync(cancellationToken);
     }
