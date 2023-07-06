@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Customers\SchoolOrganizer.Customers.Contracts\SchoolOrganizer.Customers.Contracts.csproj" />
       <ProjectReference Include="..\..\Shared\SchoolOrganizer.Shared.Infrastructure\SchoolOrganizer.Shared.Infrastructure.csproj" />
       <ProjectReference Include="..\SchoolOrganizer.Groups.Contracts\SchoolOrganizer.Groups.Contracts.csproj" />
     </ItemGroup>

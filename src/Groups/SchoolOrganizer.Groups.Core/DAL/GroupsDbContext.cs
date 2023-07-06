@@ -8,6 +8,7 @@ public class GroupsDbContext : DbContext
 {
     public DbSet<Group> Groups => Set<Group>();
     public DbSet<Schedule> Schedules => Set<Schedule>();
+    public DbSet<Attendance> Attendance => Set<Attendance>();
     public GroupsDbContext(DbContextOptions<GroupsDbContext> options) : base(options)
     {
     }

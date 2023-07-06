@@ -18,8 +18,7 @@ public class ChildrenRepository: IChildrenRepository
     public async Task<Child> Get(Guid id, CancellationToken cancellationToken = default)
     {
         return await _childrenDbContext
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken) 
-               ?? throw new ChildNotFoundException();
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public async Task<IEnumerable<Child>> GetByParentId(Guid parentId, CancellationToken cancellationToken = default)
