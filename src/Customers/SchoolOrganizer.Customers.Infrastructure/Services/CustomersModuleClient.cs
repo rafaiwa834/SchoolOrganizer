@@ -15,6 +15,6 @@ public class CustomersModuleClient: ICustomersModuleClient
     public async Task<bool> CheckIfChildrenExists(Guid childrenId, CancellationToken cancellationToken)
     {
         var children = await _childrenRepository.Get(childrenId, cancellationToken);
-        return children is null ? true : false;
+        return children is not null;
     }
 }
