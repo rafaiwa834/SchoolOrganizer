@@ -5,7 +5,7 @@ using SchoolOrganizer.Groups.Core.Services;
 
 namespace SchoolOrganizer.Groups.Api.Controllers;
 [ApiController]
-[Route(GroupsModule.BasePath)]
+[Route(GroupsModule.BasePath + "/attendance")]
 [Tags(GroupsModule.BasePath)]
 public class AttendanceController: ControllerBase
 {
@@ -16,7 +16,7 @@ public class AttendanceController: ControllerBase
         _attendanceService = attendanceService;
     }
 
-    [HttpPost]
+    [HttpPost()]
     public async Task<ActionResult> Create(CreateAttendanceDto createAttendance)
     {
         await _attendanceService.Create(createAttendance, new CancellationToken());

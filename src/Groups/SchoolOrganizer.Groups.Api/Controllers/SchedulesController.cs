@@ -6,7 +6,7 @@ using SchoolOrganizer.Groups.Core.Services;
 namespace SchoolOrganizer.Groups.Api.Controllers;
 
 [ApiController]
-[Route(GroupsModule.BasePath)]
+[Route(GroupsModule.BasePath + "/schedule")]
 [Tags(GroupsModule.BasePath)]
 public class SchedulesController: ControllerBase
 {
