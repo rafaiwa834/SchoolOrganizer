@@ -13,40 +13,29 @@ public class NotificationsService
         _notificationsMessageProducer = notificationsMessageProducer;
     }
 
-    public async Task ProduceEmailMessage(Guid parentId, string message, CancellationToken cancellationToken)
+    public async Task ProduceMessage(List<Guid> parentIds, string message, NotificationsTypeEnum notificationsType, CancellationToken cancellationToken)
     {
-        var parent = await _customersModuleClient.GetParent(parentId, cancellationToken);
-        var messageTemplate = new NotificationMessageTemplate()
+        var parents = await _customersModuleClient.GetParents(parentIds, cancellationToken);
+        foreach (var parent in parents)
         {
-            Receiver = $@"{parent.FirstName} {parent.LastName}",
-            Email = parent.Email,
-            Message = message
-        };
-        _notificationsMessageProducer.SendNotificationMessage(messageTemplate);
+            NotificationMessageTemplate messageTemplate = CreateNotificationTemplate(notificationsType, message, parent);
+            _notificationsMessageProducer.AddNotificationToQueue(messageTemplate);   
+        }
     }
-    
-    public async Task ProduceSmsMessage(Guid parentId, string message, CancellationToken cancellationToken)
+
+    private NotificationMessageTemplate CreateNotificationTemplate(NotificationsTypeEnum notificationsType, string message, ParentContractDto parent)
     {
-        var parent = await _customersModuleClient.GetParent(parentId, cancellationToken);
-        var messageTemplate = new NotificationMessageTemplate()
+        var receiver = notificationsType switch
         {
-            Receiver = $@"{parent.FirstName} {parent.LastName}",
-            PhoneNumber = parent.PhoneNumber,
-            Message = message
+            NotificationsTypeEnum.All => $"{parent.Email};{parent.PhoneNumber}",
+            NotificationsTypeEnum.EMAIL => parent.Email,
+            NotificationsTypeEnum.SMS => parent.PhoneNumber,
         };
-        _notificationsMessageProducer.SendNotificationMessage(messageTemplate);
-    }
-    
-    public async Task ProduceMessage(Guid parentId, string message, CancellationToken cancellationToken)
-    {
-        var parent = await _customersModuleClient.GetParent(parentId, cancellationToken);
-        var messageTemplate = new NotificationMessageTemplate()
+        return new NotificationMessageTemplate()
         {
-            Receiver = $@"{parent.FirstName} {parent.LastName}",
-            Email = parent.Email,
-            PhoneNumber = parent.PhoneNumber,
-            Message = message
+            Receiver = receiver,
+            Message = message,
+            Type = notificationsType
         };
-        _notificationsMessageProducer.SendNotificationMessage(messageTemplate);
     }
 }

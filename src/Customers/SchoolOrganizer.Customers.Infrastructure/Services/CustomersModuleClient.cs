@@ -21,9 +21,10 @@ public class CustomersModuleClient: ICustomersModuleClient
         return children is not null;
     }
 
-    public async Task<ParentContractDto> GetParent(Guid parentId, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ParentContractDto>> GetParents(List<Guid> parentIds, CancellationToken cancellationToken)
     {
-        var parent = await _parentsRepository.Get(parentId, cancellationToken);
-        return new ParentContractDto(parent.Id, parent.FirstName, parent.LastName, parent.Email, parent.PhoneNumber);
+        var parents = await _parentsRepository.GetMultiple(parentIds, cancellationToken);
+        return parents.Select(p =>
+            new ParentContractDto(p.Id, p.FirstName, p.LastName, p.Email, p.PhoneNumber));
     }
 }

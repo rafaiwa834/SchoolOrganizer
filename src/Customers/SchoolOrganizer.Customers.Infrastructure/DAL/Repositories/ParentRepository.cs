@@ -21,11 +21,16 @@ public class ParentRepository : IParentsRepository
         return await _parentsDbContext.AsNoTracking()
             .ToListAsync(cancellationToken);
     }
-
+    
     public async Task<Parent> Get(Guid id, CancellationToken cancellationToken = default)
     {
         return await _parentsDbContext
             .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+    }
+
+    public async Task<List<Parent>> GetMultiple(List<Guid> ids, CancellationToken cancellationToken = default)
+    {
+        return await _parentsDbContext.Where(x => ids.Contains(x.Id)).AsNoTracking().ToListAsync(cancellationToken);
     }
 
     public async Task<Parent> GetByEmail(string email, CancellationToken cancellationToken = default)
